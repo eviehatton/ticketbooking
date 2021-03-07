@@ -23,7 +23,7 @@ namespace ticketbooking
 
                 if (MenuChoice == 2)
                 {
-
+                    ViewEvents.DisplayEvents();
                 }
 
                 if (MenuChoice == 3)
@@ -42,8 +42,11 @@ namespace ticketbooking
                 }
 
             }
+            Menu();
 
 
         }
+
+       
     }
 }
