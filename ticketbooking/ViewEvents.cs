@@ -18,22 +18,26 @@ namespace ticketbooking
             using (SqlConnection connection = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = 'C:\Users\backdoor\source\repos\ticketbooking\ticketbooking\Database1.mdf'; Integrated Security = True"))
             {
                 connection.Open();
-                using (SqlCommand command = new SqlCommand("SELECT EventName, EventPrice, DateEvent FROM Events", connection))
+                using (SqlCommand command = new SqlCommand("SELECT EventId, EventName, EventPrice, DateEvent FROM Events", connection))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            Console.WriteLine("-------------------------");
-                            for (int i = 0; i < reader.FieldCount; i++)
-                            {
-                                
-                                Console.WriteLine(reader.GetValue(i));
-                            }
+                            Console.WriteLine("----------------------------------------------");
+                            Console.WriteLine("| Event Number: " + (int)reader["EventId"]);
+                            Console.WriteLine("| Event Name: " + (string)reader["EventName"]);
+                            Console.WriteLine("| Price: " + (double)reader["EventPrice"]);
+                            Console.WriteLine("| Date: " + (DateTime)reader["DateEvent"]);
+                            Console.WriteLine("----------------------------------------------");
                             Console.WriteLine();
+
+                            //(int)reader[0]
+                            //(DateTime)reader["OrderDate"]
                         }
                     }
                 }
+
             }
         }
         

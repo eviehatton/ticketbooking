@@ -14,6 +14,7 @@ namespace ticketbooking
                 Console.WriteLine("2. View Events");
                 Console.WriteLine("3. Login into account");
                 Console.WriteLine("4. Admin Login");
+                Console.WriteLine("-----------------------------------");
                 int MenuChoice = int.Parse(Console.ReadLine());
 
                 if (MenuChoice == 1)
@@ -35,7 +36,7 @@ namespace ticketbooking
                 {
 
                 }
-                else
+                if (MenuChoice>4 || MenuChoice <1)
                 {
                     Console.WriteLine("not a valid input");
                     Menu();
