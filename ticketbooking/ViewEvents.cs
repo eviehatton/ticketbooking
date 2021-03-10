@@ -32,10 +32,14 @@ namespace ticketbooking
                             Console.WriteLine("----------------------------------------------");
                             Console.WriteLine();
 
-                            //(int)reader[0]
-                            //(DateTime)reader["OrderDate"]
+                            
                         }
                     }
+                }
+                Console.WriteLine("Press enter to return to menu");
+                if (Console.ReadKey().Key == ConsoleKey.Enter) {
+                    Console.Clear();
+                    Program.Menu();
                 }
 
             }
