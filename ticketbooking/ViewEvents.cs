@@ -32,18 +32,19 @@ namespace ticketbooking
                             Console.WriteLine("----------------------------------------------");
                             Console.WriteLine();
 
-                            
+
                         }
                     }
                 }
-                Console.WriteLine("Press enter to return to menu");
-                if (Console.ReadKey().Key == ConsoleKey.Enter) {
-                    Console.Clear();
-                    Program.Menu();
-                }
+                
 
             }
         }
-        
     }
 }
+    
+//Console.WriteLine("Press enter to return to menu");
+//if (Console.ReadKey().Key == ConsoleKey.Enter)
+//{
+//    Console.Clear();
+//  

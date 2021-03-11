@@ -13,37 +13,34 @@ namespace ticketbooking
             Console.WriteLine("3. Login into account");
             Console.WriteLine("4. Admin Login");
             Console.WriteLine("-----------------------------------");
-            int MenuChoice = int.Parse(Console.ReadLine());
+            string MenuChoice = (Console.ReadLine());
 
-            if (MenuChoice == 1)
+            if (MenuChoice == "1")
             {
                 UserBooking.BookEvent();
             }
 
-            if (MenuChoice == 2)
+            if (MenuChoice == "2")
             {
                 ViewEvents.DisplayEvents();
             }
 
-            if (MenuChoice == 3)
+            if (MenuChoice == "3")
             {
 
             }
 
-            if (MenuChoice == 4)
+            if (MenuChoice == "4")
             {
 
             }
-            if (MenuChoice > 4 || MenuChoice < 1)
-            {
-                Console.WriteLine("not a valid input");
-                Menu();
-            }
+            
 
         }
         public static void Main(string[] args)
         {
             Menu();
+            
         }
     }
     

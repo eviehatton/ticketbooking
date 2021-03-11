@@ -13,7 +13,7 @@ namespace ticketbooking
     {
         public static void bookingEvent()
         {
-
+            Seats.DisplaySeats();
         }
         public static void BookEvent()
         {
@@ -21,7 +21,8 @@ namespace ticketbooking
             Console.WriteLine("----------------------------");
             Console.WriteLine("Booking");
             Console.WriteLine("Enter event number to book :");
-            int eventbook = int.Parse(Console.ReadLine());
+            string eventbook = Console.ReadLine();
+            Console.Clear();
             using (SqlConnection connection = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = 'C:\Users\backdoor\source\repos\ticketbooking\ticketbooking\Database1.mdf'; Integrated Security = True"))
             {
                 connection.Open();
@@ -42,14 +43,16 @@ namespace ticketbooking
                     }
                 }
             }
+            
             Console.WriteLine("Confirm this is the event you want to book (Y) (N)");
             string confirmA = (Console.ReadLine());
             if (confirmA.ToUpper() == "Y")
             {
                 Console.WriteLine("redirecting to booking page...");
-                System.Threading.Thread.Sleep(5000);
+                System.Threading.Thread.Sleep(3000);
                 Console.Clear();
                 bookingEvent();
+                
             }
             else
             {

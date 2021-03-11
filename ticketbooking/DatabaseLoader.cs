@@ -73,5 +73,21 @@ namespace ticketbooking
                 VenueList.Add(Out);
             }
         }
+        static void GetSeats(List<SeatsClass> SeatsList)
+        {
+            SeatsList = new List<SeatsClass>();
+            SqlConnection Connect = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB; AttachDbFilename= 'C:\Users\backdoor\source\repos\ticketbooking\ticketbooking\Database1.mdf' ;Integrated Security=True");
+            string sql = "SELECT * FROM Seats";
+            SqlDataAdapter adapter = new SqlDataAdapter(sql, Connect);
+            DataTable DataOutcome = new DataTable();
+            adapter.Fill(DataOutcome);
+
+            foreach (DataRow row in DataOutcome.Rows)
+            {
+                SeatsClass Out = new SeatsClass(row);
+                SeatsList.Add(Out);
+            }
+        }
+
     }
 }
