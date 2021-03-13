@@ -13,7 +13,7 @@ namespace ticketbooking
     {
         public static void bookingEvent()
         {
-            Seats.DisplaySeats();
+            Seats.DisplaySeats(3);
         }
         public static void BookEvent()
         {
@@ -49,7 +49,7 @@ namespace ticketbooking
             if (confirmA.ToUpper() == "Y")
             {
                 Console.WriteLine("redirecting to booking page...");
-                System.Threading.Thread.Sleep(3000);
+                System.Threading.Thread.Sleep(2000);
                 Console.Clear();
                 bookingEvent();
                 
@@ -58,6 +58,10 @@ namespace ticketbooking
             {
                 Program.Menu();
             }
+        }
+        public static void FinalBooking()
+        {
+
         }
     }
 }

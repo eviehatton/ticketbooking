@@ -15,9 +15,9 @@ namespace ticketbooking
         int _status;
         int _seatId;
 
-        public string SeatValue { get => _seatValue; set => _seatValue = value; }
-        public int Status { get => _status; set => _status = value; }
-        public int SeatId { get => _seatId; set => _seatId = value; }
+        public string seatValue { get => _seatValue; set => _seatValue = value; }
+        public int status { get => _status; set => _status = value; }
+        public int seatId { get => _seatId; set => _seatId = value; }
 
         public SeatsClass(DataRow row)
         {
@@ -40,7 +40,7 @@ namespace ticketbooking
             if (_seatId == -1) // first time
             {
 
-                string isql = "INSERT INTO Booking (seatValue, status) VALUES (?,?)";
+                string isql = "INSERT INTO Seats (seatValue, status) VALUES (?,?)";
                 SqlCommand Cmd = new SqlCommand(isql, Connect);
                 Cmd.Parameters.AddWithValue("seatValue", _seatValue);
                 Cmd.Parameters.AddWithValue("status", _status);
@@ -54,7 +54,7 @@ namespace ticketbooking
             }
             else
             {
-                string isql = "UPDATE Event SET seatValue=?,status=? WHERE seatId=?";
+                string isql = "UPDATE Seats SET seatValue=?,status=? WHERE seatId=?";
                 SqlCommand Cmd = new SqlCommand(isql, Connect);
                 Cmd.Parameters.AddWithValue("seatValue", _seatValue);
                 Cmd.Parameters.AddWithValue("status", _status);

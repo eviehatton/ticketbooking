@@ -17,10 +17,10 @@ namespace ticketbooking
         string _Lastname;
         string _Email;
 
-        public int CustomerId1 { get => _CustomerId; set => _CustomerId = value; }
-        public string Firstname1 { get => _Firstname; set => _Firstname = value; }
-        public string Lastname1 { get => _Lastname; set => _Lastname = value; }
-        public string Email1 { get => _Email; set => _Email = value; }
+        public int CustomerId { get => _CustomerId; set => _CustomerId = value; }
+        public string Firstname { get => _Firstname; set => _Firstname = value; }
+        public string Lastname { get => _Lastname; set => _Lastname = value; }
+        public string Email { get => _Email; set => _Email = value; }
 
         public Customers(DataRow row)
         {

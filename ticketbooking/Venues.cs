@@ -40,7 +40,7 @@ namespace ticketbooking
             if (_VenueId == -1) // first time
             {
 
-                string isql = "INSERT INTO Venue (VenueLocation,VenueName,Capacity,) VALUES (?,?,?)";
+                string isql = "INSERT INTO Venues (VenueLocation,VenueName,Capacity,) VALUES (?,?,?)";
                 SqlCommand Cmd = new SqlCommand(isql, Connect);
                 Cmd.Parameters.AddWithValue("VenueLocation", _VenueLocation);
                 Cmd.Parameters.AddWithValue("VenueName", _VenueName);
@@ -53,7 +53,7 @@ namespace ticketbooking
             }
             else
             {
-                string isql = "UPDATE Venue SET VenueLocation=?,venueName=?,Capacity=? WHERE VenueId=?";
+                string isql = "UPDATE Venues SET VenueLocation=?,venueName=?,Capacity=? WHERE VenueId=?";
                 SqlCommand Cmd = new SqlCommand(isql, Connect);
                 Cmd.Parameters.AddWithValue("VenueLocation", _VenueLocation);
                 Cmd.Parameters.AddWithValue("VenueName", _VenueName);
