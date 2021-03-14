@@ -82,7 +82,7 @@ namespace ticketbooking
                 Console.WriteLine("logging in...");
                 System.Threading.Thread.Sleep(1000);
                 Console.Clear();
-                ViewDataA();
+                AdminView.AdminMenu();
             }
 
         }
