@@ -134,8 +134,22 @@ namespace ticketbooking
             cmd.Parameters.AddWithValue("@seatId", seatid);
             cmd.Parameters.AddWithValue("@status", 1);
             cmd.ExecuteNonQuery();
-            
 
+            Console.WriteLine("Booking Complete!");
+            Console.WriteLine("Would you like to create an account to view order details? (Y) (N)");
+            string response = Console.ReadLine().ToUpper();
+            if (response == "Y") 
+            {
+                UserLogin.CreateAccount(email,customerid);
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("redirecting to homepage");
+                System.Threading.Thread.Sleep(2000);
+                Console.Clear();
+                Program.Menu();
+            }
 
             conn.Close();
         }

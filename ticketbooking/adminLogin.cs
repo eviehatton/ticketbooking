@@ -109,9 +109,6 @@ namespace ticketbooking
             objTripleDESCryptoService.Clear();
             return Convert.ToBase64String(resultArray, 0, resultArray.Length);
         }
-        static void ViewDataA()
-        {
-
-        }
+        
     }
 }
