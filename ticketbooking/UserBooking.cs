@@ -59,9 +59,86 @@ namespace ticketbooking
                 Program.Menu();
             }
         }
-        public static void FinalBooking()
+        public static void FinalBooking(int eventid, string seat)
         {
 
+            Console.WriteLine("-----Enter Details-----");
+            Console.Write("\nFirst name:");
+            string firstname = Console.ReadLine();
+            Console.Write("\nLast name:");
+            string lastname = Console.ReadLine();
+            Console.Write("\nContact Email:");
+            string email = Console.ReadLine();
+
+
+            SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB; AttachDbFilename= 'C:\Users\backdoor\source\repos\ticketbooking\ticketbooking\Database1.mdf' ;Integrated Security=True");
+            conn.Open();
+
+            string command = "INSERT INTO Customers (FirstName, SecondName, Email) VALUES( @FirstName, @SecondName, @Email)";
+            SqlCommand myCommand = new SqlCommand(command, conn);
+            myCommand.Parameters.AddWithValue("@CustomerId", 0);
+            myCommand.Parameters.AddWithValue("@FirstName", firstname);
+            myCommand.Parameters.AddWithValue("@SecondName", lastname);
+            myCommand.Parameters.AddWithValue("@Email", email);
+            myCommand.ExecuteNonQuery();
+
+
+
+            string priceSQl = "SELECT EventPrice FROM Events where EventId = @eid";
+            SqlDataAdapter da = new SqlDataAdapter(priceSQl, conn);
+            da.SelectCommand.Parameters.AddWithValue("eid", eventid);
+            DataTable _EventPrice = new DataTable();
+            da.Fill(_EventPrice);
+            List<string> priceList = new List<string>();
+            foreach (DataRow dr in _EventPrice.Rows)
+            {
+                priceList.Add(dr[0].ToString());
+            }
+            double price = double.Parse(priceList[0]);
+
+
+
+
+            string com = "SELECT CustomerId FROM Customers where FirstName = @firstname";
+            SqlDataAdapter da2 = new SqlDataAdapter(com, conn);
+            da2.SelectCommand.Parameters.AddWithValue("firstname", firstname);
+            DataTable _CustomerId = new DataTable();
+            da2.Fill(_CustomerId);
+            List<string> CList = new List<string>();
+            foreach (DataRow dr in _CustomerId.Rows)
+            {
+                CList.Add(dr[0].ToString());
+            }
+            int customerid = int.Parse(CList[0]);
+
+            string con2 = "SELECT seatId FROM Seats where seatValue = @value";
+            SqlDataAdapter da3 = new SqlDataAdapter(con2, conn);
+            da3.SelectCommand.Parameters.AddWithValue("value", seat);
+            DataTable _seatId = new DataTable();
+            da3.Fill(_seatId);
+            List<string> seatI = new List<string>();
+            foreach (DataRow dr in _seatId.Rows)
+            {
+                seatI.Add(dr[0].ToString());
+            }
+            int seatid = int.Parse(seatI[0]);
+
+            
+            string insBook = "INSERT INTO Bookings (CustomerId ,EventId ,Price ,seatValue ,seatId ,status) VALUES (@CustomerId,@EventId,@Price,@seatValue,@seatId,@status)";
+
+            SqlCommand cmd = new SqlCommand(insBook, conn);
+            cmd.Parameters.AddWithValue("@CustomerId", customerid);
+            cmd.Parameters.AddWithValue("@EventId", eventid);
+            cmd.Parameters.AddWithValue("@Price", price);
+            cmd.Parameters.AddWithValue("@seatValue", seat);
+            cmd.Parameters.AddWithValue("@seatId", seatid);
+            cmd.Parameters.AddWithValue("@status", 1);
+            cmd.ExecuteNonQuery();
+            
+
+
+            conn.Close();
         }
     }
 }
+

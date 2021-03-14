@@ -102,7 +102,7 @@ namespace ticketbooking
                     }
                     else
                     {
-                        UserBooking.FinalBooking();
+                        UserBooking.FinalBooking(eventid,seatChoice);
                     }
                 }
 
