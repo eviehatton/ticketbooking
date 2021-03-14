@@ -19,12 +19,12 @@ namespace ticketbooking
         public int status { get => _status; set => _status = value; }
         public int seatId { get => _seatId; set => _seatId = value; }
 
+
         public SeatsClass(DataRow row)
         {
-            _seatId = int.Parse(row["seatId"].ToString());
+            //_seatId = int.Parse(row["seatId"].ToString());
             _seatValue = (row["seatValue"].ToString());
             _status = int.Parse(row["status"].ToString());
-            
         }
 
         public SeatsClass()
@@ -44,8 +44,6 @@ namespace ticketbooking
                 SqlCommand Cmd = new SqlCommand(isql, Connect);
                 Cmd.Parameters.AddWithValue("seatValue", _seatValue);
                 Cmd.Parameters.AddWithValue("status", _status);
-                
-
 
                 Cmd.ExecuteNonQuery();
                 //get the generated seatid
@@ -58,11 +56,9 @@ namespace ticketbooking
                 SqlCommand Cmd = new SqlCommand(isql, Connect);
                 Cmd.Parameters.AddWithValue("seatValue", _seatValue);
                 Cmd.Parameters.AddWithValue("status", _status);
-                
+
                 Cmd.ExecuteNonQuery();
             }
         }
-
-
     }
 }

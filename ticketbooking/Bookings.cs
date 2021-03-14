@@ -15,24 +15,30 @@ namespace ticketbooking
         int _CustomerId;
         int _EventId;
         decimal _Price;
-        int _Seat;
+        string _seatValue;
+        int _status;
+        int _seatId;
+
         
 
         public int BookingId { get => _BookingId; set => _BookingId = value; }
         public int CustomerId { get => _CustomerId; set => _CustomerId = value; }
         public int EventId { get => _EventId; set => _EventId = value; }
         public decimal Price { get => _Price; set => _Price = value; }
-        public int Seat { get => _Seat; set => _Seat = value; }
-        
+        public string seatValue { get => _seatValue; set => _seatValue = value; }
+        public int Status { get => _status; set => _status = value; }
+        public int SeatId { get => _seatId; set => _seatId = value; }
 
         public Bookings(DataRow row)
         {
-            _BookingId = int.Parse(row["BookingID"].ToString());
-            _CustomerId = int.Parse(row["CustomerID"].ToString());
-            _EventId = int.Parse(row["EventID"].ToString());
+            _BookingId = int.Parse(row["BookingId"].ToString());
+            _CustomerId = int.Parse(row["CustomerId"].ToString());
+            _EventId = int.Parse(row["EventId"].ToString());
             _Price = decimal.Parse(row["Price"].ToString());
-            _Seat = int.Parse(row["Seat"].ToString());
-            
+            _seatValue = row["seatValue"].ToString();
+            _status = int.Parse(row["status"].ToString());
+            _seatId = int.Parse(row["seatId"].ToString());
+
         }
 
         public Bookings()
@@ -48,13 +54,15 @@ namespace ticketbooking
             if (_BookingId == -1) // first time
             {
 
-                string isql = "INSERT INTO Bookings (CustomerId, EventId Price, Seat) VALUES (?,?,?,?)";
+                string isql = "INSERT INTO Bookings (CustomerId, EventId Price, seatValue, status, seatId) VALUES (?,?,?,?,?,?)";
                 SqlCommand Cmd = new SqlCommand(isql, Connect);
                 Cmd.Parameters.AddWithValue("CustomerID", _CustomerId);
                 Cmd.Parameters.AddWithValue("EventID", _EventId);
                 Cmd.Parameters.AddWithValue("Price", _Price);
-                Cmd.Parameters.AddWithValue("Seat", _Seat);
-                
+                Cmd.Parameters.AddWithValue("sealValue", _seatValue);
+                Cmd.Parameters.AddWithValue("status", _status);
+                Cmd.Parameters.AddWithValue("seatId", _seatId);
+
 
 
                 Cmd.ExecuteNonQuery();
@@ -64,13 +72,14 @@ namespace ticketbooking
             }
             else
             {
-                string isql = "UPDATE Bookings SET EventID=?,CustomerId=?,Seat=?,Price=? WHERE BookingID=?";
+                string isql = "UPDATE Bookings SET EventID=?,CustomerId=?,Seat=?,Price=?,status=?,seatId=? WHERE BookingID=?";
                 SqlCommand Cmd = new SqlCommand(isql, Connect);
-                Cmd.Parameters.AddWithValue("EventID", _EventId);
-                Cmd.Parameters.AddWithValue("CustomerID", _CustomerId);
-                Cmd.Parameters.AddWithValue("SeatBlock", _Seat);
-                ;
+                Cmd.Parameters.AddWithValue("EventId", _EventId);
+                Cmd.Parameters.AddWithValue("CustomerId", _CustomerId);
+                Cmd.Parameters.AddWithValue("seatValue", _seatValue);
                 Cmd.Parameters.AddWithValue("Price", _Price);
+                Cmd.Parameters.AddWithValue("status", _status);
+                Cmd.Parameters.AddWithValue("seatId", _seatId);
                 Cmd.Parameters.AddWithValue("BookingID", _BookingId);
                 Cmd.ExecuteNonQuery();
             }
