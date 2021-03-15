@@ -9,6 +9,7 @@ using System.Data.SqlTypes;
 
 namespace ticketbooking
 {
+    
     public class Admin
     {
         int _AdminId;

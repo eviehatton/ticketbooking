@@ -72,6 +72,7 @@ namespace ticketbooking
             }
             else
             {
+                //writing the infomation to the bookings table in database
                 string isql = "UPDATE Bookings SET EventID=?,CustomerId=?,Seat=?,Price=?,status=?,seatId=? WHERE BookingID=?";
                 SqlCommand Cmd = new SqlCommand(isql, Connect);
                 Cmd.Parameters.AddWithValue("EventId", _EventId);

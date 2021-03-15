@@ -1,5 +1,4 @@
 ﻿using System;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,9 +17,11 @@ namespace ticketbooking
             Console.WriteLine("------Admin View------");
             Console.Write("Pick event num to view stats for:");
             int eventP = int.Parse(Console.ReadLine());
+            //picking the event id 
 
             SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB; AttachDbFilename= 'C:\Users\backdoor\source\repos\ticketbooking\ticketbooking\Database1.mdf' ;Integrated Security=True");
             conn.Open();
+            //opening connection string
 
             string priceSQl = "SELECT Price FROM Bookings where EventId = @eid";
             SqlDataAdapter da = new SqlDataAdapter(priceSQl, conn);
@@ -35,6 +36,8 @@ namespace ticketbooking
                 double price = double.Parse(priceList[0]);
                 priceTotal = priceTotal + price;
             }
+            //getting price of event selected from database 
+            //passing it to a new list and adding up price for each row 
 
             string command = "SELECT BookingId FROM Bookings where EventId = @eid";
             SqlDataAdapter da2 = new SqlDataAdapter(command, conn);
@@ -47,6 +50,8 @@ namespace ticketbooking
             {
                 count++;
             }
+            //getting bookingid and passing to to list
+            //counting rows in the list to calculate how many bookings for one event 
 
             string command2 = "SELECT EventName FROM Events where EventId = @eid";
             SqlDataAdapter da3 = new SqlDataAdapter(command2, conn);
@@ -60,6 +65,8 @@ namespace ticketbooking
                 
             }
             string eventname = (nameList[0]);
+            //getting event name for the eventid selected
+            
 
             Console.Write("Viewing stats for {0}", eventname);
             Console.WriteLine("\nTotal Bookings for Event {0} : {1}", eventP, count);
@@ -72,6 +79,7 @@ namespace ticketbooking
                 Console.Clear();
                 Program.Menu();
             }
+            //displaying stats for event 
 
 
         }

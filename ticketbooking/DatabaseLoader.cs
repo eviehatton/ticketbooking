@@ -89,5 +89,36 @@ namespace ticketbooking
             }
         }
 
+        static void GetAdminLogins(List<Admin> AdminList)
+        {
+            AdminList = new List<Admin>();
+            SqlConnection Connect = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB; AttachDbFilename= 'C:\Users\backdoor\source\repos\ticketbooking\ticketbooking\Database1.mdf' ;Integrated Security=True");
+            string sql = "SELECT * FROM AdminLogins";
+            SqlDataAdapter adapter = new SqlDataAdapter(sql, Connect);
+            DataTable DataOutcome = new DataTable();
+            adapter.Fill(DataOutcome);
+
+            foreach (DataRow row in DataOutcome.Rows)
+            {
+                Admin Out = new Admin(row);
+                AdminList.Add(Out);
+            }
+        }
+        static void GetUserLogin(List<Users> UserList)
+        {
+            UserList = new List<Users>();
+            SqlConnection Connect = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB; AttachDbFilename= 'C:\Users\backdoor\source\repos\ticketbooking\ticketbooking\Database1.mdf' ;Integrated Security=True");
+            string sql = "SELECT * FROM UserLogins";
+            SqlDataAdapter adapter = new SqlDataAdapter(sql, Connect);
+            DataTable DataOutcome = new DataTable();
+            adapter.Fill(DataOutcome);
+
+            foreach (DataRow row in DataOutcome.Rows)
+            {
+                Users Out = new Users(row);
+                UserList.Add(Out);
+            }
+        }
+
     }
 }

@@ -6,6 +6,7 @@ namespace ticketbooking
     {
         public static void Menu()
         {
+            //displaying main menu
             Console.WriteLine("Ticket Booking");
             Console.WriteLine("-----------------------------------");
             Console.WriteLine("1. Book tickets");
@@ -16,6 +17,7 @@ namespace ticketbooking
             Console.WriteLine("-----------------------------------");
             string MenuChoice = (Console.ReadLine());
 
+            //getting user input and directing to correct method
             if (MenuChoice == "1")
             {
                 UserBooking.BookEvent();

@@ -11,9 +11,9 @@ namespace ticketbooking
 {
     public class UserBooking
     {
-        public static void bookingEvent()
+        public static void bookingEvent(int eventid)
         {
-            Seats.DisplaySeats(3);
+            Seats.DisplaySeats(eventid);
         }
         public static void BookEvent()
         {
@@ -51,7 +51,7 @@ namespace ticketbooking
                 Console.WriteLine("redirecting to booking page...");
                 System.Threading.Thread.Sleep(2000);
                 Console.Clear();
-                bookingEvent();
+                bookingEvent(int.Parse(eventbook));
                 
             }
             else

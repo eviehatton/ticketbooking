@@ -16,17 +16,20 @@ namespace ticketbooking
     {
         public static void UserLoginA()
         {
+            //gathering login details 
             Console.Clear();
             Console.WriteLine("-----Admin Login-----");
             Console.Write("Enter Username:");
             string enteredUser = Console.ReadLine();
 
-
+            //establishing connection to database
             using SqlConnection connection = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = 'C:\Users\backdoor\source\repos\ticketbooking\ticketbooking\Database1.mdf'; Integrated Security = True");
             connection.Open();
             string command = "SELECT Username FROM AdminLogins";
 
+            //getting the username from the database and comparing it to user input
             SqlDataAdapter da = new SqlDataAdapter(command, connection);
+            //creating a datatable to insert relevant data
             DataTable _Username = new DataTable();
             da.Fill(_Username);
             List<string> userList = new List<string>();
@@ -34,7 +37,9 @@ namespace ticketbooking
             {
                 userList.Add(dr[0].ToString());
             }
+            //adding usernames to list so specifics can be retrieved
             connection.Close();
+            //checking the username is valid 
             bool E = userList.Contains(enteredUser);
             if (!E)
             {
@@ -42,10 +47,11 @@ namespace ticketbooking
                 System.Threading.Thread.Sleep(1000);
                 Console.Clear();
                 UserLoginA();
-
+                //back to login page if false to try again
             }
             else
             {
+                //passing the username to the password checker
                 PassCheck(enteredUser);
             }
         }
@@ -54,11 +60,12 @@ namespace ticketbooking
             Console.Write("Enter Password:");
             string enteredPass = Console.ReadLine();
             string encyrptedPass = EncryptPlainTextToCipherText(enteredPass);
+            //getting user input and passing it through encrytption
 
             using SqlConnection connection = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = 'C:\Users\backdoor\source\repos\ticketbooking\ticketbooking\Database1.mdf'; Integrated Security = True");
             connection.Open();
             string command = "SELECT Password FROM AdminLogins";
-
+            //opening connection to database and getting the encrypted passwords
             SqlDataAdapter da = new SqlDataAdapter(command, connection);
             DataTable _Password = new DataTable();
             da.Fill(_Password);
@@ -68,11 +75,13 @@ namespace ticketbooking
                 passList.Add(dr[0].ToString());
             }
             connection.Close();
+            //checking the encypted input against database
             bool E = passList.Contains(encyrptedPass);
             if (!E)
             {
                 Console.WriteLine("incorrect password");
                 PassCheck(username);
+                //if false redirected to password check again
                 
                 
 
@@ -83,10 +92,12 @@ namespace ticketbooking
                 System.Threading.Thread.Sleep(1000);
                 Console.Clear();
                 AdminView.AdminMenu();
+                //redirec to admin method if all infomation matched
             }
 
         }
         private const string SecurityKey = "Sty1les_C0mpl@x_K£y";
+        //encrytpting the passwords to protect them
         public static string EncryptPlainTextToCipherText(string PlainText)
         {
             byte[] toEncryptedArray = UTF8Encoding.UTF8.GetBytes(PlainText);
