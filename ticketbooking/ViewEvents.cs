@@ -13,6 +13,7 @@ namespace ticketbooking
     {
         public static void DisplayEvents()
         {
+            
             Console.WriteLine("Viewing current available events");
             Console.WriteLine("--------------------------------");
             using (SqlConnection connection = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = 'C:\Users\backdoor\source\repos\ticketbooking\ticketbooking\Database1.mdf'; Integrated Security = True"))
@@ -20,10 +21,12 @@ namespace ticketbooking
                 connection.Open();
                 using (SqlCommand command = new SqlCommand("SELECT EventId, EventName, EventPrice, DateEvent FROM Events", connection))
                 {
+                    //opeining connection
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
+                            //reading and displaying all data from database
                             Console.WriteLine("----------------------------------------------");
                             Console.WriteLine("| Event Number: " + (int)reader["EventId"]);
                             Console.WriteLine("| Event Name: " + (string)reader["EventName"]);
@@ -36,15 +39,16 @@ namespace ticketbooking
                         }
                     }
                 }
-                
-
             }
+            /*
+            Console.WriteLine("press enter to go back to homepage");
+            string input = Console.ReadLine();
+            if (input == (""))
+            {
+                Console.Clear();
+                Program.Menu();
+            }
+            */
         }
     }
 }
-    
-//Console.WriteLine("Press enter to return to menu");
-//if (Console.ReadKey().Key == ConsoleKey.Enter)
-//{
-//    Console.Clear();
-//  

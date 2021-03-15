@@ -11,6 +11,7 @@ namespace ticketbooking
             Console.WriteLine("1. Book tickets");
             Console.WriteLine("2. View Events");
             Console.WriteLine("3. Login into account");
+            Console.WriteLine("4. Cancel Booking");
             Console.WriteLine("4. Admin Login");
             Console.WriteLine("-----------------------------------");
             string MenuChoice = (Console.ReadLine());
@@ -31,6 +32,11 @@ namespace ticketbooking
             }
 
             if (MenuChoice == "4")
+            {
+                UserLogin.LoginTo();
+            }
+
+            if (MenuChoice == "5")
             {
                 AdminLogin.UserLoginA();
             }

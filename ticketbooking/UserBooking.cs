@@ -140,6 +140,7 @@ namespace ticketbooking
             string response = Console.ReadLine().ToUpper();
             if (response == "Y") 
             {
+                Console.Clear();
                 UserLogin.CreateAccount(email,customerid);
             }
             else

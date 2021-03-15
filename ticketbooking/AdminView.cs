@@ -48,10 +48,31 @@ namespace ticketbooking
                 count++;
             }
 
-            Console.WriteLine("\nTotal Bookings for Event {0} : {1}", eventP, count);
+            string command2 = "SELECT EventName FROM Events where EventId = @eid";
+            SqlDataAdapter da3 = new SqlDataAdapter(command2, conn);
+            da3.SelectCommand.Parameters.AddWithValue("eid", eventP);
+            DataTable _EventName = new DataTable();
+            da3.Fill(_EventName);
+            List<string> nameList = new List<string>();
+            foreach (DataRow dr in _EventName.Rows)
+            {
+                nameList.Add(dr[0].ToString());
+                
+            }
+            string eventname = (nameList[0]);
 
+            Console.Write("Viewing stats for {0}", eventname);
+            Console.WriteLine("\nTotal Bookings for Event {0} : {1}", eventP, count);
+            Console.WriteLine("Total Revenue for Event {0} : £{1}", eventP, priceTotal);
             conn.Close();
-            
+            Console.WriteLine("press enter to go back to homepage");
+            string input = Console.ReadLine();
+            if (input == (""))
+            {
+                Console.Clear();
+                Program.Menu();
+            }
+
 
         }
     }

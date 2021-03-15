@@ -15,7 +15,7 @@ namespace ticketbooking
     {
         public static void CreateAccount(string email, int customerid)
         {
-            Console.WriteLine("enter password:");
+            Console.Write("create password:");
             string enteredPass = Console.ReadLine();
             bool valid = ValidatePassword(enteredPass);
             if (valid)
@@ -250,17 +250,26 @@ namespace ticketbooking
             string deleteinput = Console.ReadLine().ToUpper();
             if (deleteinput == "Y")
             {
+                Console.Write("enter booking ref of booking to cancel");
+                int DB = int.Parse(Console.ReadLine());
+
                 string sqlStatement = "DELETE FROM Bookings WHERE CustomerID = @BookingID";
                 SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB; AttachDbFilename= 'C:\Users\backdoor\source\repos\ticketbooking\ticketbooking\Database1.mdf' ;Integrated Security=True");
                 connection.Open();
                 SqlCommand cmd = new SqlCommand(sqlStatement, connection);
-                cmd.Parameters.AddWithValue("@BookingID",bookingid);
+                cmd.Parameters.AddWithValue("@BookingID",DB);
                 cmd.CommandType = CommandType.Text;
                 cmd.ExecuteNonQuery();
                 connection.Close();
+                Console.WriteLine("deletion successful");
+                Console.WriteLine("redirecting to homepage....");
+                System.Threading.Thread.Sleep(1000);
+                Console.Clear();
+                Program.Menu();
             }
             else
             {
+                
                 Console.WriteLine("press enter to go back to homepage");
                 string input = Console.ReadLine();
                 if (input == (""))
@@ -268,6 +277,7 @@ namespace ticketbooking
                     Console.Clear();
                     Program.Menu();
                 }
+                
             }
 
 
